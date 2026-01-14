@@ -1,0 +1,5 @@
+CREATE DATABASE DeaneryDB;
+GO
+
+USE DeaneryDB;
+GO

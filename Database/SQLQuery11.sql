@@ -1,0 +1,14 @@
+CREATE TABLE Hobbies (
+    HobbyID INT IDENTITY PRIMARY KEY,
+    HobbyName NVARCHAR(120) NOT NULL UNIQUE
+);
+GO
+
+CREATE TABLE StudentHobbies (
+    StudentID INT NOT NULL,
+    HobbyID INT NOT NULL,
+    CONSTRAINT PK_StudentHobbies PRIMARY KEY (StudentID, HobbyID),
+    CONSTRAINT FK_SH_Students FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    CONSTRAINT FK_SH_Hobbies  FOREIGN KEY (HobbyID)  REFERENCES Hobbies(HobbyID)
+);
+GO

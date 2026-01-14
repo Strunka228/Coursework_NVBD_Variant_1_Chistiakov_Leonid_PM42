@@ -1,0 +1,5 @@
+CREATE TABLE Faculties (
+    FacultyID INT IDENTITY PRIMARY KEY,
+    FacultyName NVARCHAR(200) NOT NULL,
+    FacultyCode NVARCHAR(10) NOT NULL UNIQUE
+);

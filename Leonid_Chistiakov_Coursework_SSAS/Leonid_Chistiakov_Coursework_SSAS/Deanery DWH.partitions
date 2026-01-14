@@ -1,0 +1,498 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="47054c36-860b-4ca9-8610-69ab0404187c" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Deanery DWH</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>Fact Dorm Stays</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="c0a1b314-2876-44ff-8c72-35e1941f1236">
+          <ID>Fact Dorm Stays</ID>
+          <Name>Fact Dorm Stays</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="8fa927d1-0ee3-4d91-8c1d-e9d5e3fa62d1">
+            <DataSourceViewID>Deanery DWH</DataSourceViewID>
+            <TableID>dbo_FactDormStays</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Grades</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="4c2173a0-0cf2-4a0c-b703-2bcf2ad35024">
+          <ID>Fact Grades</ID>
+          <Name>FactGrades_Archive_upto2022</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="cd29671d-d2ef-4fcd-b04e-ad4fdc7c339b">
+            <DataSourceID>Deanery DWH</DataSourceID>
+            <QueryDefinition>SELECT [dbo].[FactGrades].[FactGradeKey],[dbo].[FactGrades].[StudentKey],[dbo].[FactGrades].[SubjectKey],[dbo].[FactGrades].[TeacherKey],[dbo].[FactGrades].[DateKey],[dbo].[FactGrades].[GradeValue],[dbo].[FactGrades].[IsPassing],[dbo].[FactGrades].[LoadDate]
+  FROM [dbo].[FactGrades]
+		WHERE [DateKey] &lt; 20220101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <EstimatedRows>500000</EstimatedRows>
+          <AggregationDesignID>Aggregations_Grades</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="26ece326-dcbb-4baa-92ad-b9169f8a3b6e">
+          <ID>FactGrades_Current_from2022</ID>
+          <Name>FactGrades_Current_from2022</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="bf1d879e-96ac-45bc-ad55-72828d94d99c">
+            <DataSourceID>Deanery DWH</DataSourceID>
+            <QueryDefinition>SELECT [dbo].[FactGrades].[FactGradeKey],[dbo].[FactGrades].[StudentKey],[dbo].[FactGrades].[SubjectKey],[dbo].[FactGrades].[TeacherKey],[dbo].[FactGrades].[DateKey],[dbo].[FactGrades].[GradeValue],[dbo].[FactGrades].[IsPassing],[dbo].[FactGrades].[LoadDate]
+  FROM [dbo].[FactGrades]
+		WHERE [DateKey] &gt;= 20220101</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <EstimatedRows>500000</EstimatedRows>
+          <AggregationDesignID>AggregationDesign</AggregationDesignID>
+        </Partition>
+      </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>Aggregations_Grades</ID>
+          <Name>Aggregations_Grades</Name>
+          <CreatedTimestamp>2026-01-09T00:31:46.72Z</CreatedTimestamp>
+          <LastSchemaUpdate>2026-01-09T00:31:46.72Z</LastSchemaUpdate>
+          <EstimatedRows>500000</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>Dim Date</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date Key</AttributeID>
+                  <EstimatedCount>4383</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Number Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Number Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Calendar Quarter</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Calendar Year</AttributeID>
+                  <EstimatedCount>12</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Year</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Dim Subjects</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Subject Key</AttributeID>
+                  <EstimatedCount>500</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Subject Code</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Dim Teachers</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Teacher Key</AttributeID>
+                  <EstimatedCount>238</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Faculty Name</AttributeID>
+                  <EstimatedCount>19</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Dim Students</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Student Key</AttributeID>
+                  <EstimatedCount>11385</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Full Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Gender</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Group Code</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Specialty Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Faculty Name</AttributeID>
+                  <EstimatedCount>19</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Education Form</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Subject Key</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Calendar Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Faculty Name</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Faculty Name</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Calendar Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Teacher Key</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+        <AggregationDesign>
+          <ID>AggregationDesign</ID>
+          <Name>AggregationDesign</Name>
+          <CreatedTimestamp>2026-01-09T00:38:24.826667Z</CreatedTimestamp>
+          <LastSchemaUpdate>2026-01-09T00:38:24.826667Z</LastSchemaUpdate>
+          <EstimatedRows>500000</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>Dim Date</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Date Key</AttributeID>
+                  <EstimatedCount>4383</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Day Number Of Week</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Number Of Year</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Calendar Quarter</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Calendar Year</AttributeID>
+                  <EstimatedCount>12</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Month Year</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Dim Subjects</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Subject Key</AttributeID>
+                  <EstimatedCount>500</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Subject Code</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Dim Teachers</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Teacher Key</AttributeID>
+                  <EstimatedCount>238</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Faculty Name</AttributeID>
+                  <EstimatedCount>19</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>Dim Students</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>Student Key</AttributeID>
+                  <EstimatedCount>11385</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Full Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Gender</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Group Code</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Specialty Name</AttributeID>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Faculty Name</AttributeID>
+                  <EstimatedCount>19</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>Education Form</AttributeID>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+          <Aggregations>
+            <Aggregation>
+              <ID>Aggregation 0</ID>
+              <Name>Aggregation 0</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Subject Key</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 1</ID>
+              <Name>Aggregation 1</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 2</ID>
+              <Name>Aggregation 2</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Calendar Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Faculty Name</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Faculty Name</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+            <Aggregation>
+              <ID>Aggregation 3</ID>
+              <Name>Aggregation 3</Name>
+              <Dimensions>
+                <Dimension>
+                  <CubeDimensionID>Dim Date</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Calendar Year</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Subjects</CubeDimensionID>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Teachers</CubeDimensionID>
+                  <Attributes>
+                    <Attribute>
+                      <AttributeID>Teacher Key</AttributeID>
+                    </Attribute>
+                  </Attributes>
+                </Dimension>
+                <Dimension>
+                  <CubeDimensionID>Dim Students</CubeDimensionID>
+                </Dimension>
+              </Dimensions>
+            </Aggregation>
+          </Aggregations>
+        </AggregationDesign>
+      </AggregationDesigns>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Library Loans</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="a3d90f9e-51da-4cdf-a57b-c19b24a191ab">
+          <ID>Fact Library Loans</ID>
+          <Name>Fact Library Loans</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="c37bb796-ff7c-413c-a288-f5ac80ab06c5">
+            <DataSourceViewID>Deanery DWH</DataSourceViewID>
+            <TableID>dbo_FactLibraryLoans</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+    <MeasureGroup>
+      <ID>Fact Grades 1</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="aa25e26e-6967-411d-b783-ee9ebd76c3f4">
+          <ID>Fact Grades</ID>
+          <Name>Fact Grades</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="7ed4c50f-d4a1-4678-bc5d-ea9d7193e78e">
+            <DataSourceViewID>Deanery DWH</DataSourceViewID>
+            <TableID>dbo_FactGrades</TableID>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+        </Partition>
+      </Partitions>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>

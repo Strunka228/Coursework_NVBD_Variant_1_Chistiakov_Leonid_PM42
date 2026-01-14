@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-DG0HJ50_LOCALHOST1.DeaneryDB.sa"
+  DTS:DTSID="{DC81CF2D-221D-47BC-9596-296450664303}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=DESKTOP-DG0HJ50\LOCALHOST1;User ID=sa;Initial Catalog=DeaneryDB;Provider=SQLOLEDB.1;Persist Security Info=True;Application Name=SSIS-Leonid_Chistiakov_Coursework_SSIS-{DC81CF2D-221D-47BC-9596-296450664303}DESKTOP-DG0HJ50\LOCALHOST1.DeaneryDB.sa;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9kJxBfNzNE6gd/C1HnvPKAAAAAACAAAAAAAQZgAAAAEAACAAAAAVqAc+A7Os23Bq1JAl7VO51KdWVJsFkXSnsVSh/nY74QAAAAAOgAAAAAIAACAAAAB0e2rPAiSAcxAA5+B7SDOs7yoHLQqpuqVJ2pAolYUkCXAAAAAjAQRSzC6QLL9M+wYAWfdFgXyei0oUt0aPWIutzROJ2MTEuF3cikG7OgkcvBrSxh6c6JpUrBlUv9mmKYAu6XHLLaAPxqY1Bnr1y7PdCBUiI52zF50d3uZqPJAXv9s7KAebM2HBvlgNmInGH1jUp5zCQAAAAOvIP5+oCHSEFnKKRhIbZxLKjW0C6wEcaRdSQVa1N0sgUJTV9FpvJkSwkeTXC0t0SyB2UXPHZCao2cuaunI0Q18=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
